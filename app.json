@@ -1,0 +1,37 @@
+{
+  "expo": {
+    "name": "Avaliação SEMAD",
+    "slug": "semad-avaliacao-totem",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#104873",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#104873"
+    },
+    "android": {
+      "package": "br.gov.saoluis.semad.avaliacao",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#104873",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "softwareKeyboardLayoutMode": "resize",
+      "permissions": []
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font",
+      ["expo-navigation-bar", { "hidden": true, "style": "light", "enforceContrast": false }],
+      ["expo-build-properties", { "android": { "usesCleartextTraffic": true } }],
+      "./plugins/withHomeLauncher"
+    ]
+  }
+}
