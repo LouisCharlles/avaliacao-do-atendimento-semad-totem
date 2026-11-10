@@ -42,5 +42,7 @@ yarn-error.*
 
 # Segredos e pastas nativas geradas (CNG)
 .env
+# APKs gerados levam a chave do totem embutida
+*.apk
 /android
 /ios

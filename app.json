@@ -31,7 +31,8 @@
       "expo-font",
       ["expo-navigation-bar", { "hidden": true, "style": "light", "enforceContrast": false }],
       ["expo-build-properties", { "android": { "usesCleartextTraffic": true } }],
-      "./plugins/withHomeLauncher"
+      "./plugins/withHomeLauncher",
+      "./plugins/withReleaseSigning"
     ]
   }
 }
