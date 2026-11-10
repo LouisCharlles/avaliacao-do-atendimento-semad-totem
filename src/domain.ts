@@ -86,7 +86,6 @@ export const PERGUNTAS: Pergunta[] = [
 
 export const SETORES = [
   { sigla: 'ASJUR', nome: 'Assessoria Jurídica' },
-  { sigla: 'ASTEC', nome: 'Assessoria Técnica' },
   { sigla: 'ASRES', nome: 'Assessoria de Relações Sindicais' },
   { sigla: 'CEAT', nome: 'Central de Atendimento' },
   { sigla: 'COAD', nome: 'Coordenação de Avaliação de Desempenho' },
