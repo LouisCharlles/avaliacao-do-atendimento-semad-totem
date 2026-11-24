@@ -16,6 +16,7 @@ interface Props {
 export default function Comentario({ valorInicial = '', onEnviar, onVoltar, onAtividade }: Props) {
   const { s } = useEscala();
   const [texto, setTexto] = useState(valorInicial);
+  const temTexto = texto.trim().length > 0;
 
   return (
     <KeyboardAvoidingView style={{ flex: 1, backgroundColor: cores.pagina }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -66,9 +67,8 @@ export default function Comentario({ valorInicial = '', onEnviar, onVoltar, onAt
 
         <View style={{ flexDirection: 'row', gap: s(16), alignItems: 'center' }}>
           <Botao titulo="‹  Voltar" variante="secundario" onPress={() => onVoltar(texto)} />
-          <View style={{ flex: 1 }} />
-          {!texto.trim() && <Botao titulo="Pular e enviar" variante="secundario" onPress={() => onEnviar('')} />}
-          <Botao titulo="Enviar avaliação" onPress={() => onEnviar(texto)} desabilitado={!texto.trim()} />
+          {/* O comentário é opcional: o mesmo botão envia com ou sem texto. */}
+          <Botao titulo="Enviar avaliação" onPress={() => onEnviar(temTexto ? texto : '')} style={{ flex: 1 }} />
         </View>
       </View>
     </KeyboardAvoidingView>

@@ -100,7 +100,9 @@ export function Botao({
         style,
       ]}
     >
-      <Text style={{ color: v.fg, fontSize: s(26), fontFamily: fontes.titulo }}>{titulo}</Text>
+      <Text numberOfLines={1} style={{ color: v.fg, fontSize: s(26), fontFamily: fontes.titulo }}>
+        {titulo}
+      </Text>
     </Pressable>
   );
 }

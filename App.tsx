@@ -7,7 +7,7 @@ import { useFonts, Montserrat_600SemiBold, Montserrat_700Bold, Montserrat_800Ext
 import { cores, fontes, ProvedorEscala, useEscala } from './src/tema';
 import { ETAPAS, PERGUNTAS, type Etapa, type Respostas, type Resolucao, type Sigla } from './src/domain';
 import { carregarConfig } from './src/configuracao';
-import { enfileirar, sincronizar } from './src/fila';
+import { enfileirar, iniciarSincronizacao } from './src/fila';
 import { Botao } from './src/components/Base';
 import Inicio from './src/telas/Inicio';
 import Pergunta from './src/telas/Pergunta';
@@ -22,7 +22,6 @@ type Tela = 'inicio' | Etapa | 'obrigado' | 'admin';
 const AVISO_INATIVIDADE_MS = 45_000;
 /** …e, sem resposta, descarta a avaliação incompleta e volta ao início. */
 const RESET_INATIVIDADE_MS = 60_000;
-const SINCRONIZAR_A_CADA_MS = 30_000;
 const ATRASO_AVANCO_MS = 350;
 
 export default function App() {
@@ -50,11 +49,17 @@ function Totem() {
     setTela('inicio');
   }, []);
 
-  // Configuração salva no aparelho + envio periódico da fila offline.
+  // Configuração salva no aparelho + envio automático da fila offline (ver src/fila.ts).
   useEffect(() => {
-    carregarConfig().then(() => sincronizar().catch(() => undefined));
-    const t = setInterval(() => sincronizar().catch(() => undefined), SINCRONIZAR_A_CADA_MS);
-    return () => clearInterval(t);
+    let parar: (() => void) | undefined;
+    let desmontado = false;
+    carregarConfig().then(() => {
+      if (!desmontado) parar = iniciarSincronizacao();
+    });
+    return () => {
+      desmontado = true;
+      parar?.();
+    };
   }, []);
 
   // Inatividade: só conta durante a avaliação.

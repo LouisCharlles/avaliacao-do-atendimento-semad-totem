@@ -24,7 +24,7 @@ Telas em `docs/prototipo/totem-telas.png`.
 - Barras de status e de navegação do Android ocultas.
 - Botão "voltar" físico só volta uma etapa, nunca sai do app.
 - Após 45 s sem toque aparece o aviso "Ainda está aí?". Aos 60 s a avaliação incompleta é descartada e o app volta ao início. Digitar o comentário conta como atividade.
-- **Fila offline**: cada avaliação é gravada no aparelho antes de ser enviada. Sem rede, o app tenta de novo a cada 30 s. Cada avaliação tem um UUID, então o reenvio não duplica.
+- **Fila offline**: cada avaliação é gravada no aparelho antes de ser enviada. Os pendentes vão em lotes de 50 (`POST /api/avaliacoes/lote`); se o servidor não tiver essa rota, o app envia um por vez. O envio acontece logo após cada avaliação, assim que a rede volta (NetInfo), quando o app volta à tela e, como reserva, a cada 30 s. Se falhar, o intervalo dobra até 5 min, e um 429 do servidor é respeitado (`Retry-After`). Cada avaliação tem um UUID, então o reenvio não duplica.
 
 ## Configuração
 
